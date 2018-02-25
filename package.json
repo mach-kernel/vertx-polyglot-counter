@@ -1,0 +1,8 @@
+{
+  "name": "vertx-peered-counter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mach-kernel/vertx-peered-counter.git",
+  "author": "David Stancu <dstancu@nyu.edu>",
+  "license": "MIT"
+}
