@@ -4,11 +4,8 @@ import { Counter } from './components/Counter.jsx'
 import ReactDOM from 'react-dom/server'
 import React from 'react'
 
-// vert.x is implicitly scoped by the JVM runtime,
-// however there exist separate JS interop packages
-// that we need to link in. See webpack config on how to
-// ignore this import and treat it as commonjs (where the Nashorn wrapper)
-// will resolve it
+// vertx is implicitly scoped for you, but look at the
+// webpack config to understand how to deal with other externals
 
 import Router from 'vertx-web-js/router'
 import HandlebarsTemplateEngine from 'vertx-web-js/handlebars_template_engine'
@@ -25,10 +22,12 @@ staticHandler.setDirectoryListing(true)
 
 // When doing SSR, we can query our service verticles for data
 // while we do the render. Ostensibly you can conditionally perform
-// SSR depending on the server response!
+// SSR depending on an event bus query!
 router.get('/').handler((context) => {
   eb.send("count-ask", "hello from JS!", (countMessage, err) => {
     context.put('component', ReactDOM.renderToString(<Counter count={countMessage.body()}/>))
+
+    context.put('initial', {count: countMessage.body()})
 
     templateEngine.render(
       context,

@@ -1,6 +1,6 @@
 /**
- * This is the clientside bundle, notice how in the template
- * verticle we do the exact same thing as we do here!
+ * Here we just hydrate with the same state that we
+ * were provided with on the server.
  */
 
 import React, { Component } from 'react'
@@ -11,6 +11,6 @@ import { Counter } from './components/counter.jsx'
 window.addEventListener(
   'load',
   () => {
-    ReactDOM.hydrate(<Counter />, document.getElementById("app-root"))
+    ReactDOM.hydrate(<Counter {...window.countstate} />, document.getElementById("app-root"))
   }
 )
