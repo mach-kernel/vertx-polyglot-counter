@@ -1,7 +1,8 @@
 import 'babel-polyfill';
 
 import { Counter } from './components/Counter.jsx'
-import ReactDOM from 'react-dom/server';
+import ReactDOM from 'react-dom/server'
+import React from 'react'
 
 var server = vertx.createHttpServer()
 
