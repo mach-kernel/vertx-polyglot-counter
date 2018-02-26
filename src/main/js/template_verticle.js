@@ -21,12 +21,9 @@ var router = Router.router(vertx)
 // while we do the render. Ostensibly you can conditionally perform
 // SSR depending on the server response!
 router.get('/').handler((context) => {
-  eb.send("count-ask", "", (res, err) => {
-    console.log(res, err);
-
-    // console.log(askResult)
+  eb.send("count-ask", "hello from JS!", (res, err) => {
     context.response().end(
-        ReactDOM.renderToString(<Counter />)
+        ReactDOM.renderToString(<Counter count={res.body()}/>)
     )
   })
 })

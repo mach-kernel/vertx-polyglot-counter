@@ -1,6 +1,7 @@
 package counter
 
 import io.vertx.core.AbstractVerticle
+import io.vertx.core.json.JsonObject
 import java.util.concurrent.atomic.AtomicInteger
 
 class CounterVerticle: AbstractVerticle() {
@@ -13,6 +14,8 @@ class CounterVerticle: AbstractVerticle() {
 
         eb.consumer<Any>("count-ask") { message ->
             println("Service ask for counter ${count.get().toString()}")
+            println("Ask says: ${message.body().toString()}")
+
             message.reply(count.get().toString())
         }
 
