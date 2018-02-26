@@ -1,8 +1,8 @@
-import { Vertx } from 'vertx-web-js'
+import 'babel-polyfill';
+
+import { Counter } from './components/Counter.jsx'
+import ReactDOM from 'react-dom/server';
 
 var server = vertx.createHttpServer()
-var router = vertx.router()
 
-router.get('/').handler((context) => context.response().end("HELLO WORLD"))
-
-server.requestHandler(router.accept()).listen(8080)
+server.requestHandler((context) => context.response().end(ReactDOM.renderToString(<Counter />))).listen(8080)

@@ -50,8 +50,9 @@ dependencies {
     compile "io.vertx:vertx-web:3.5.1"
     compile "io.vertx:vertx-lang-js:3.5.1"
     compile "org.jetbrains.kotlin:kotlin-stdlib"
+    compile "io.vertx:vertx-web:3.3.3:client@js"
 }
 
 run {
-    args = ["run", "demoapp.MainVerticle", "--launcher-class=io.vertx.core.Launcher", "--on-redeploy=gradle classes"]
+    args = ["run", "build/js/template_verticle.js", "--launcher-class=io.vertx.core.Launcher", "--on-redeploy=gradle classes"]
 }
