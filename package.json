@@ -6,6 +6,7 @@
   "author": "David Stancu <dstancu@nyu.edu>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",

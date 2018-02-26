@@ -31,18 +31,17 @@ compileKotlin {
 
 mainClassName = 'io.vertx.core.Launcher'
 
+task webpack(type: Exec) {
+    commandLine "$projectDir/node_modules/.bin/webpack"
+}
+
+run {
+    dependsOn webpack
+}
+
 repositories {
     mavenCentral()
     jcenter()
-
-    maven {
-        url "https://kotlin.bintray.com/kotlin-js-wrappers"
-    }
-
-    maven {
-        url "https://kotlin.bintray.com/kotlinx"
-    }
-
 }
 
 dependencies {
@@ -54,5 +53,5 @@ dependencies {
 }
 
 run {
-    args = ["run", "build/js/template_verticle.js", "--launcher-class=io.vertx.core.Launcher", "--on-redeploy=gradle classes"]
+    args = ["run", "counter.CounterEndpointVerticle", "--launcher-class=io.vertx.core.Launcher", "--on-redeploy=gradle classes"]
 }

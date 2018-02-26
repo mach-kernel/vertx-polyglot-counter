@@ -8,6 +8,9 @@ var serviceConfig = {
     path: path.join(__dirname, 'build/js'),
     filename: "template_verticle.js"
   },
+  externals: {
+    'vertx-web-js/router': 'commonjs vertx-web-js/router'
+  },
   module: {
     rules: [
       {
@@ -26,10 +29,7 @@ var serviceConfig = {
       path.join(__dirname, 'src/main/js')
     ]
   },
-  mode: 'development',
-  plugins: [
-    new webpack.IgnorePlugin(/^vertx/)
-  ]
+  mode: 'development'
 }
 
 var clientConfig = {
