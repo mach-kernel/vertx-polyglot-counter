@@ -9,6 +9,8 @@ var serviceConfig = {
     filename: "template_verticle.js"
   },
   externals: {
+    'vertx-web-js/static_handler': 'commonjs vertx-web-js/static_handler',
+    'vertx-web-js/handlebars_template_engine': 'commonjs vertx-web-js/handlebars_template_engine',
     'vertx-web-js/router': 'commonjs vertx-web-js/router'
   },
   module: {
@@ -36,7 +38,7 @@ var clientConfig = {
   name: "client",
   entry: path.join(__dirname, 'src/main/js/client.js'),
   output: {
-    path: path.join(__dirname, 'build/js'),
+    path: path.join(__dirname, 'src/main/resources/webroot/static'),
     filename: "client.js"
   },
   module: {
@@ -57,6 +59,7 @@ var clientConfig = {
       path.join(__dirname, 'src/main/js')
     ]
   },
+  mode: 'development'
 }
 
 module.exports = [serviceConfig, clientConfig]

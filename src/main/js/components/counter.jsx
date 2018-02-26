@@ -8,20 +8,18 @@ export class Counter extends Component {
       this.state = {}
       if (props.count) this.state.count = props.count
       else {
-        axios.get('localhost:8080/counter').then(this.axiosCounterHandler)
+        axios.get('http://localhost:8081/counter')
+             .then((res, _err) => this.setState({count: res.data}))
       }
     }
 
-    axiosCounterHandler(res, err) {
-      this.state.count = res.data
-    }
-
     incrementAndUpdate() {
-      axios.post('localhost:8080/counter').then(this.axiosCounterHandler)
+      axios.post('http://localhost:8081/counter')
+           .then((res, _err) => this.setState({count: res.data}))
     }
 
     render() {
-        if (!this.state.count) {
+        if (typeof this.state.count === 'undefined') {
           return(<div>
               <h1>Wait...downloading from API...</h1>
           </div>)
@@ -30,7 +28,7 @@ export class Counter extends Component {
           return(<div>
             <h1>Hello!</h1>
             <h2>The current count is {this.state.count}</h2>
-            <button onClick={this.incrementAndUpdate.bind(this)}>
+            <button onClick={() => this.incrementAndUpdate()}>
               Increment!
             </button>
           </div>)

@@ -50,6 +50,8 @@ dependencies {
     compile "io.vertx:vertx-lang-js:3.5.1"
     compile "org.jetbrains.kotlin:kotlin-stdlib"
     compile "io.vertx:vertx-web:3.3.3:client@js"
+    compile "io.vertx:vertx-hazelcast:3.5.1"
+    compile "io.vertx:vertx-web-templ-handlebars:3.5.1"
 }
 
 run {
