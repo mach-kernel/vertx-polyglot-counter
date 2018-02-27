@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import { Counter } from './components/Counter.jsx'
+import { Counter } from './components/counter.jsx'
 import ReactDOM from 'react-dom/server'
 import React from 'react'
 
