@@ -10,7 +10,7 @@ export class Counter extends Component {
     }
 
     incrementAndUpdate() {
-      axios.post('http://localhost:8081/counter')
+      axios.post('http://localhost:8080/counter')
            .then((res, _err) => this.setState({count: res.data}))
     }
 

@@ -13,14 +13,10 @@ class CounterVerticle: AbstractVerticle() {
         super.start()
 
         eb.consumer<Any>("count-ask") { message ->
-            println("Service ask for counter ${count.get().toString()}")
-            println("Ask says: ${message.body().toString()}")
-
             message.reply(count.get().toString())
         }
 
         eb.consumer<Any>("count-increment") { message ->
-            println("Service ask for increment")
             message.reply(count.incrementAndGet().toString())
         }
     }
