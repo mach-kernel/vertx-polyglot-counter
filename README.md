@@ -18,5 +18,6 @@ JDK 9+ support is encouraged for Nashorn performance improvements
 git clone git@github.com:mach-kernel/vertx-polyglot-counter.git
 cd vertx-polyglot-counter
 yarn install
+yarn webpack
 gradle run
 ```
