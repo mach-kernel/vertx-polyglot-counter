@@ -58,5 +58,12 @@ dependencies {
 }
 
 run {
-    args = ["run", "counter.CounterEndpointVerticle", "--launcher-class=io.vertx.core.Launcher", "--on-redeploy=gradle classes"]
+    args = [
+        "run",
+        "counter.CounterEndpointVerticle",
+//      Try one per core!
+//      "-instances2",
+        "--launcher-class=io.vertx.core.Launcher",
+        "--on-redeploy=gradle classes"
+    ]
 }

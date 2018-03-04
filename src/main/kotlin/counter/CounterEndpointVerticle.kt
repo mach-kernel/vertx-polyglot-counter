@@ -6,8 +6,12 @@ import io.vertx.core.Future
 import io.vertx.core.eventbus.Message
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonObject
+import io.vertx.ext.bridge.PermittedOptions
 import io.vertx.ext.web.Router
+import io.vertx.ext.web.handler.CorsHandler
 import io.vertx.ext.web.handler.StaticHandler
+import io.vertx.ext.web.handler.sockjs.BridgeOptions
+import io.vertx.ext.web.handler.sockjs.SockJSHandler
 import io.vertx.ext.web.templ.HandlebarsTemplateEngine
 
 class CounterEndpointVerticle: AbstractVerticle() {
@@ -15,6 +19,9 @@ class CounterEndpointVerticle: AbstractVerticle() {
 
     private val templateEngine by lazy { HandlebarsTemplateEngine.create() }
     private val staticHandler by lazy { StaticHandler.create() }
+
+    private val sockJSHandler by lazy { SockJSHandler.create(vertx) }
+    private val options = BridgeOptions()
 
     override fun start() {
         startHttp()
@@ -25,6 +32,15 @@ class CounterEndpointVerticle: AbstractVerticle() {
         val router = Router.router(vertx)
         val http = vertx.createHttpServer()
 
+        arrayOf("ssr", "count-ask", "count-increment").forEach {
+            options.addInboundPermitted(PermittedOptions().setAddress(it))
+            options.addOutboundPermitted(PermittedOptions().setAddress(it))
+        }
+
+        sockJSHandler.bridge(options)
+        router.route("/eventbus/*").handler(sockJSHandler)
+
+        router.route().handler(CorsHandler.create("*"))
         router.get("/js/*").handler(staticHandler::handle)
 
         router.get("/").handler { req ->
@@ -62,8 +78,10 @@ class CounterEndpointVerticle: AbstractVerticle() {
             println("Counter up!")
         })
 
-        vertx.deployVerticle("build/js/template_verticle.js", DeploymentOptions(JsonObject(mapOf("instances" to 5))), {
-            println("JS verticle up!")
-        })
+        // This can also be tuned if you're on a large multi-core machine!
+        val deployOpts = DeploymentOptions(JsonObject(mapOf("instances" to 2)))
+        deployOpts.setWorker(true)
+
+        vertx.deployVerticle("build/js/template_verticle.js", deployOpts, { println("JS verticle up!") })
     }
 }
