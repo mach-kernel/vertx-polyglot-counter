@@ -13,6 +13,11 @@ import io.vertx.ext.web.handler.StaticHandler
 import io.vertx.ext.web.handler.sockjs.BridgeOptions
 import io.vertx.ext.web.handler.sockjs.SockJSHandler
 import io.vertx.ext.web.templ.HandlebarsTemplateEngine
+import io.vertx.ext.web.templ.MessageBackedRenderEngine
+import io.vertx.ext.web.templ.StackableTemplateEngine
+import io.vertx.ext.web.templ.impl.MessageBackedRenderEngineImpl
+import io.vertx.ext.web.templ.impl.StackableTemplateEngineImpl
+
 
 class CounterEndpointVerticle: AbstractVerticle() {
     private val eb by lazy { vertx.eventBus() }
@@ -20,10 +25,16 @@ class CounterEndpointVerticle: AbstractVerticle() {
     private val templateEngine by lazy { HandlebarsTemplateEngine.create() }
     private val staticHandler by lazy { StaticHandler.create() }
 
+    private val stackableTemplateEngine by lazy { StackableTemplateEngine.create() }
+    private val mbre by lazy { MessageBackedRenderEngine.create(vertx) }
+
     private val sockJSHandler by lazy { SockJSHandler.create(vertx) }
     private val options = BridgeOptions()
 
     override fun start() {
+        stackableTemplateEngine.addEngine(mbre)
+                               .addEngine(templateEngine);
+
         startHttp()
         startServices()
     }

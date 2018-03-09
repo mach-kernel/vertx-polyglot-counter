@@ -22,6 +22,7 @@ plugins {
 }
 
 apply plugin: "kotlin"
+apply plugin: "idea"
 
 compileKotlin {
     kotlinOptions {
@@ -35,17 +36,14 @@ task webpack(type: Exec) {
     commandLine "$projectDir/node_modules/.bin/webpack"
 }
 
-build {
-    dependsOn webpack
-}
-
-run {
+compileKotlin {
     dependsOn webpack
 }
 
 repositories {
     mavenCentral()
     jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -55,6 +53,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib"
     compile "io.vertx:vertx-web:3.3.3:client@js"
     compile "io.vertx:vertx-web-templ-handlebars:3.5.1"
+    compile "com.github.mach-kernel:vertx-ext-spa-ssr:master-SNAPSHOT"
 }
 
 run {
