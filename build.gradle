@@ -22,7 +22,6 @@ plugins {
 }
 
 apply plugin: "kotlin"
-apply from: '../vertx-ext-react-ssr/build.gradle'
 
 task webpack(type: Exec) {
     commandLine "$projectDir/node_modules/.bin/webpack"

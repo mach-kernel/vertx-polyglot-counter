@@ -21,7 +21,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "style-loader": "^0.20.3",
-    "vertx-ext-spa-ssr": "../vertx-ext-react-ssr",
+    "vertx-ext-spa-ssr": "mach-kernel/vertx-ext-spa-ssr",
     "vertx3-eventbus-client": "^3.5.1",
     "vertx3-full": "^3.5.1",
     "webpack": "^4.0.0",

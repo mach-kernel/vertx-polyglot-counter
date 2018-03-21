@@ -5822,8 +5822,9 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vertx-ext-spa-ssr@../vertx-ext-react-ssr:
+vertx-ext-spa-ssr@mach-kernel/vertx-ext-react-ssr:
   version "1.0.0"
+  resolved "https://codeload.github.com/mach-kernel/vertx-ext-react-ssr/tar.gz/38acd8ed2117615c1be5eb15892a6e7102ee329a"
   dependencies:
     babel-cli "^6.26.0"
     babel-plugin-transform-class "^0.3.0"
