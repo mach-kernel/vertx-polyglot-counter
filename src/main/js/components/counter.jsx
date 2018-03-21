@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { Button } from 'antd';
+
 import axios from 'axios'
 
 export class Counter extends Component {
@@ -18,9 +20,9 @@ export class Counter extends Component {
       return(<div>
         <h1>Hello!</h1>
         <h2>The current count is {this.state.count }</h2>
-        <button onClick={() => this.incrementAndUpdate()}>
+        <Button type="primary" onClick={() => this.incrementAndUpdate()}>
           Increment!
-        </button>
+        </Button>
       </div>)
     }
 }

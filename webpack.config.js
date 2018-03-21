@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var serviceConfig = {
   name: "service",
@@ -8,21 +9,16 @@ var serviceConfig = {
     path: path.join(__dirname, 'build/js'),
     filename: "template_verticle.js"
   },
-  externals: {
-    'vertx-web-js/static_handler': 'commonjs vertx-web-js/static_handler',
-    'vertx-web-js/handlebars_template_engine': 'commonjs vertx-web-js/handlebars_template_engine',
-    'vertx-web-js/router': 'commonjs vertx-web-js/router'
-  },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        // exclude: /node_modules/,
+        exclude: /node_modules/,
         options: {
           presets: ['es2015', 'react']
         }
-      }
+      },
     ]
   },
   resolve: {
@@ -38,7 +34,7 @@ var clientConfig = {
   name: "client",
   entry: path.join(__dirname, 'src/main/js/client.js'),
   output: {
-    path: path.join(__dirname, 'src/main/resources/webroot/static'),
+    path: path.join(__dirname, 'src/main/resources/webroot'),
     filename: "client.js"
   },
   module: {
@@ -50,9 +46,19 @@ var clientConfig = {
         options: {
           presets: ['es2015', 'react']
         }
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
-    ]
+    ],
   },
+  plugins: [
+    new ExtractTextPlugin("styles.css")
+  ],
   resolve: {
     modules: [
       path.join(__dirname, 'node_modules'),
