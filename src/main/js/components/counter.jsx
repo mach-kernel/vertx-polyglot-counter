@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 
 import axios from 'axios'
 
@@ -14,6 +14,10 @@ export class Counter extends Component {
     incrementAndUpdate() {
       axios.post('http://localhost:8080/counter')
            .then((res, _err) => this.setState({count: res.data}))
+           .then(() => notification.open({
+             message: 'Aww yeah!',
+             description: 'You clicked me!'
+           }))
     }
 
     render() {
