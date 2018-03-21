@@ -2,15 +2,16 @@
 <head>
     <title>Polyglot counter!</title>
     <script>
-        window.countstate = {{{ initial }}}
+        window._ssrState = {{{ _ssrState }}}
     </script>
+    <link rel="stylesheet" href="/static/styles.css"></link>
 </head>
 
 <body>
 
-<div id="app-root">{{{ component }}}</div>
+{{{ my_counter }}}
 
-<script crossorigin src="http://localhost:8080/js/static/client.js"></script>
+<script src="/static/client.js"></script>
 
 </body>
 </html>

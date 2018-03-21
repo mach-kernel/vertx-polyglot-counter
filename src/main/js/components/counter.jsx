@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { Button, notification } from 'antd';
+
 import axios from 'axios'
 
 export class Counter extends Component {
@@ -12,15 +14,19 @@ export class Counter extends Component {
     incrementAndUpdate() {
       axios.post('http://localhost:8080/counter')
            .then((res, _err) => this.setState({count: res.data}))
+           .then(() => notification.open({
+             message: 'Aww yeah!',
+             description: 'You clicked me!'
+           }))
     }
 
     render() {
       return(<div>
         <h1>Hello!</h1>
         <h2>The current count is {this.state.count }</h2>
-        <button onClick={() => this.incrementAndUpdate()}>
+        <Button type="primary" onClick={() => this.incrementAndUpdate()}>
           Increment!
-        </button>
+        </Button>
       </div>)
     }
 }

@@ -22,8 +22,15 @@ plugins {
 }
 
 apply plugin: "kotlin"
+apply from: '../vertx-ext-react-ssr/build.gradle'
+
+task webpack(type: Exec) {
+    commandLine "$projectDir/node_modules/.bin/webpack"
+}
 
 compileKotlin {
+    dependsOn webpack
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -31,39 +38,36 @@ compileKotlin {
 
 mainClassName = 'io.vertx.core.Launcher'
 
-task webpack(type: Exec) {
-    commandLine "$projectDir/node_modules/.bin/webpack"
-}
-
-build {
-    dependsOn webpack
-}
-
-run {
-    dependsOn webpack
-}
-
 repositories {
     mavenCentral()
     jcenter()
+
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     compile "io.vertx:vertx-core:3.5.1"
     compile "io.vertx:vertx-web:3.5.1"
     compile "io.vertx:vertx-lang-js:3.5.1"
+    compile "io.vertx:vertx-lang-kotlin:3.5.1"
     compile "org.jetbrains.kotlin:kotlin-stdlib"
     compile "io.vertx:vertx-web:3.3.3:client@js"
     compile "io.vertx:vertx-web-templ-handlebars:3.5.1"
+
+    compile 'com.github.mach-kernel:vertx-ext-spa-ssr:master-SNAPSHOT'
+
 }
 
 run {
     args = [
         "run",
         "counter.CounterEndpointVerticle",
+        "--redeploy=src/main/kotlin/**/*",
 //      Try one per core!
 //      "-instances2",
         "--launcher-class=io.vertx.core.Launcher",
-        "--on-redeploy=gradle classes"
+        "--on-redeploy=gradle classes",
+//        "--java-opts", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+
     ]
 }

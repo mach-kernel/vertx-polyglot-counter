@@ -1,16 +1,6 @@
-/**
- * Here we just hydrate with the same state that we
- * were provided with on the server.
- */
-
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-
 import { Counter } from './components/counter.jsx'
+import { ReactHydrator } from 'vertx-ext-spa-ssr';
 
-window.addEventListener(
-  'load',
-  () => {
-    ReactDOM.hydrate(<Counter {...window.countstate} />, document.getElementById("app-root"))
-  }
-)
+import 'antd/dist/antd.css';
+
+new ReactHydrator({ Counter });
