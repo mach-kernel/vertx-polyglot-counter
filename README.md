@@ -1,5 +1,5 @@
 # vertx-polyglot-counter
-Example React SSR with JS verticle, Kotlin / JVM verticle for HTTP API and backend, built with [vertx-ext-spa-ssr](https://github.com/mach-kernel/vertx-ext-spa-ssr)
+Example React SSR with JS verticle, Kotlin / JVM verticle for HTTP API and backend, built with [vertx-ext-spa-ssr](https://github.com/mach-kernel/vertx-ext-spa-ssr) using components from [Ant Design](http://ant.design).
 
 ![hi](https://i.imgur.com/zMT7EcE.gif)
 
