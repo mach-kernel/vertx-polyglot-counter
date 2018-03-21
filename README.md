@@ -1,6 +1,8 @@
 # vertx-polyglot-counter
 Example React SSR with JS verticle, Kotlin / JVM verticle for HTTP API and backend, built with [vertx-ext-spa-ssr](https://github.com/mach-kernel/vertx-ext-spa-ssr)
 
+![hi](https://i.imgur.com/zMT7EcE.gif)
+
 ## Motivation
 - Isomorphic React App
 - Write services in a native JVM language
