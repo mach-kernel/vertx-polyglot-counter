@@ -8,11 +8,14 @@ var React = require('react');
 router.get('/', function(req, res, next) {
   var bus = req.app.get('vertx-bus');
 
+  
   bus.send('count-ask', '', function(errask, askres) {
-    var reified = React.createElement(counter.component, { count: askres.body });
+    var reified = React.createElement(
+      counter.Counter, { count: askres.body }
+    );
 
     res.render('index', {
-      initial: JSON.stringify({ count: askres.body }),
+      initial: JSON.stringify({'cmpnt-my_counter': { count: askres.body }}),
       component: ReactDOM.renderToString(reified)
     });
   });
