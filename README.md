@@ -28,6 +28,8 @@ gradle run
 
 A functionally equivalent (to the user) Node.JS & Express React SSR app is included under `expressapp_test`. This test is to explore how Nashorn + vert.x stack up against a traditional SSR JS application built with V8. Each solution is given 3 runs and the best of the 3 is recorded.
 
+`wrk -t 1000 -c 1000 -d 30 http://localhost:8080`
+
 | Stack   |  Config   | Req / Second |
 |---------|-----------|--------------|
 | vert.x  | cache off | 4497.13      |
@@ -45,8 +47,6 @@ A functionally equivalent (to the user) Node.JS & Express React SSR app is inclu
 ### Test with caching disabled
 
 Component caching on the server-side is turned off. 
-
-`wrk -t 1000 -c 1000 -d 30 http://localhost:8080`
 
 ##### vert.x & vertx-ext-spa-ssr
 ```
