@@ -9,3 +9,8 @@ Start `vertx-polyglot-counter`, and then:
 - yarn install
 - yarn build
 - yarn start
+
+If you wish to run with `passenger` (replace 8 with the number of cores your host machine has):
+
+- brew install passenger
+`passenger start --nodejs bin/www --min-instances 8 --max-pool-size 8`
